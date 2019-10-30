@@ -1,0 +1,8 @@
+api_nomination_homepage:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix: /
+    #
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

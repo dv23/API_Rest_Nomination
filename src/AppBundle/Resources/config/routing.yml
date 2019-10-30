@@ -1,0 +1,9 @@
+api_nomination:
+    resource: "@AppBundle/Resources/config/routing/contact.yml"
+    prefix:   /contact_rest
+#api_nomination:
+#    resource: "@AppBundle/Resources/config/routing/entreprise.yml"
+#    prefix:   /entreprise_rest
+app_entreprise:
+        resource: "@AppBundle/Resources/config/routing/entreprise.yml"
+        prefix:   /entreprise
