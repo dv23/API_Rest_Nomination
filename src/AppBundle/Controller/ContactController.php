@@ -9,7 +9,7 @@ use AppBundle\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  use Symfony\Component\HttpFoundation\Request;
 //@Method("GET")
-//use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Contact controller.
@@ -17,6 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class ContactController extends Controller
 {
+    
+    
+    
     /**
      * Lists all contact entities.
      * @Route("/list/contacts", name="contact_list")
@@ -42,10 +45,21 @@ class ContactController extends Controller
         $contact = new Contact();
         $form = $this->createForm('AppBundle\Form\ContactType', $contact);
         $form->handleRequest($request);
+        // On récupère le service validator
+        $validator = $this->get('validator');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contact->setEntreprise($contact->getEntreprise()->getId()); // integer
-
+            //$contact->setEntreprise($contact->getId()); // integer
+            // On déclenche la validation sur notre object
+        //$listErrors = $validator->validate($form);
+        // Si $listErrors n'est pas vide, on affiche les erreurs
+        // if(count($listErrors) > 0) {
+         // $listErrors est un objet, sa méthode __toString permet de lister joliement les erreurs
+        //return new Response((string) $listErrors);
+        //} else {
+        //  return new Response("L'annonce est valide !");
+        //}
             // Enregistrement des données dans la base
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
@@ -85,6 +99,7 @@ class ContactController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $contact->setEntreprise($contact->getEntreprise()->getId()); // integer
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('contact_edit', array('id' => $contact->getId()));

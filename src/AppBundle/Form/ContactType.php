@@ -16,8 +16,18 @@ class ContactType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom')->add('email')->add('entreprise', EntityType::class, array('class' => 'AppBundle:Entreprise','choice_label' => 'nom'))
-    ;}
+        $builder->add('nom')->add('prenom')->add('email')
+        ->add('entreprise',
+        //[
+        //    'data' => 'abcdef',
+        //]
+        //->add('entreprise', null, 
+        //[
+        //'required'   => false,
+        //'empty_data' => 'John',
+        //],
+        EntityType::class, array('class' => 'AppBundle:Entreprise','choice_label' => 'nom'));
+    }
     /**
      * {@inheritdoc}
      */
