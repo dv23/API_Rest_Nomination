@@ -30,6 +30,9 @@ framework:
     assets: ~
     php_errors:
         log: true
+        # TO solve The service “fos_user.mailer” has a dependency on a non-existent service “templating” by vincent D
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
@@ -69,3 +72,14 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+# FOSUserBundle Configurtion
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: src\AppBundle\Entity\User
+    from_email:
+        address: "noreply@yourcompany.com"
+        sender_name: "No Reply"
+
+

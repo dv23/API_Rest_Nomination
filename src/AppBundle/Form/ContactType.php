@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 //use Symony\Compnent\Valiator\Constraints\Blank;
-
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class ContactType extends AbstractType
 {
     /**
@@ -26,7 +26,18 @@ class ContactType extends AbstractType
         //'required'   => false,
         //'empty_data' => 'John',
         //],
-        EntityType::class, array('class' => 'AppBundle:Entreprise','choice_label' => 'nom'));
+        //ChoiceType::class, ['required' => false, 
+        EntityType::class, array('class' => 'AppBundle:Entreprise','choice_label' => 'nom', )
+        //EntityType::class, array('class' => 'AppBundle:Entreprise','choice_label' => function ($choice, $key, $value) {
+        //    if (true === $choice) {
+        //        return 'Definitely!';
+        //    }
+        //       return strtoupper($key);
+        // or if you want to translate some key
+        //return 'form.choice.'.$key;
+        //    }, )
+        //]
+        );
     }
     /**
      * {@inheritdoc}
