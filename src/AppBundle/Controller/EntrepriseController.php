@@ -121,4 +121,33 @@ class EntrepriseController extends Controller
             ->getForm()
         ;
     }
+    
+    //contrôleur pour passer non seulement l'entreprise à la vue, mais également toutes ses contact :
+    public function viewAction(Request $request,$id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        // On récupère l'annonce $id
+        $entreprise = $em->getRepository('AppBundle:Entreprise')->find($id);
+    
+        if (null === $entreprise) {
+          throw new NotFoundHttpException("L'entrepris d'id ".$id." n'existe pas.");
+        }
+        $deleteForm = $this->createDeleteForm($entreprise);
+        $editForm = $this->createForm('AppBundle\Form\EntrepriseType', $entreprise);
+        $editForm->handleRequest($request);
+
+        // On récupère la liste des contact de cette entreprise
+        $listContacts = $em
+          ->getRepository('AppBundle:Contact')
+          ->findBy(array('entreprise' => $entreprise))
+        ;
+    
+        return $this->render('entreprise/view.html.twig', array(
+          'entreprise'   => $entreprise,
+          'listContacts' => $listContacts,
+          'edit_form' => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
+        ));
+      }
 }

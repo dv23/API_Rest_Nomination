@@ -50,7 +50,8 @@ class ContactController extends Controller
         $validator = $this->get('validator');
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contact->setEntreprise($contact->getEntreprise()->getId()); // integer
+            $contact->setEntreprise($contact->getEntreprise());
+            //->getId()); // integer
             //$contact->setEntreprise($contact->getId()); // integer
             // On déclenche la validation sur notre object
         //$listErrors = $validator->validate($form);
@@ -100,7 +101,7 @@ class ContactController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $contact->setEntreprise($contact->getEntreprise()->getId()); // integer
+            $contact->setEntreprise($contact->getEntreprise()); // integer
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('contact_edit', array('id' => $contact->getId()));

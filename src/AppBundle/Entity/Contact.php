@@ -19,6 +19,19 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Contact
 {
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Entreprise")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $entreprise;
+
+    /**
+     ** @var int
+     ** Pour rendre le champ entrepise facultatif, il suffit de le notifier dans annotations
+     * @ORM\Column(name="entreprise", type="integer", nullable=true, unique=true)
+     */
+    //private $entreprise; 
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -50,13 +63,6 @@ class Contact
      * @Assert\Length(min=2)
      */
     private $email;
-
-    /**
-     * @var int
-     ** Pour rendre le champ entrepise facultatif, il suffit de le notifier dans annotations
-     * @ORM\Column(name="entreprise", type="integer", nullable=true, unique=true)
-     */
-    private $entreprise; 
 
     /** public function __construct()
     *{  Initialize entreprise a blanc
@@ -163,7 +169,6 @@ class Contact
     /**
      * Get entreprise
      *
-     * @return string
      */
     public function getEntreprise()
     {

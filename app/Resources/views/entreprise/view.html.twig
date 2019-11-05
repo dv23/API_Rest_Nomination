@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Entreprise</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entreprise.id }}</td>
+            </tr>
+            <tr>
+                <th>Entreprise Nom</th>
+                <td>{{ entreprise.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <li>
+            <a href="{{ path('entreprise_edit', { 'id': entreprise.id }) }}">Mofifie l'entreprise</a>
+    </li>
+    <h1>listContact</h1>
+    
+    {% for c in listContacts %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ c.nom }}</td>
+            </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('entreprise_index') }}">Back to the list</a>
+        </li>
+        
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

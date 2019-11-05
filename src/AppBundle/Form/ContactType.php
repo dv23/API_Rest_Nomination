@@ -18,9 +18,6 @@ class ContactType extends AbstractType
     {
         $builder->add('nom')->add('prenom')->add('email')
         ->add('entreprise',
-        //[
-        //    'data' => 'abcdef',
-        //]
         //->add('entreprise', null, 
         //[
         //'required'   => false,

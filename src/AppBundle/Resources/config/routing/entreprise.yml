@@ -22,3 +22,8 @@ entreprise_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Entreprise:delete" }
     methods:  DELETE
+
+entreprise_view:
+    path:     /{id}/view
+    defaults: { _controller: "AppBundle:Entreprise:view" }
+    methods:  [GET, POST]
